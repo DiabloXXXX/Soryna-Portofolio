@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - soryna</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 via-sky-50 to-white min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-white/80 backdrop-blur-sm shadow-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html#portfolio"
+                class="text-sm text-sky-700 hover:text-sky-900 font-medium flex items-center transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>Kembali ke Portfolio
+            </a>
+            <div class="text-lg font-extrabold tracking-tight text-sky-700">
+                <span>sory</span><span class="text-sky-500">na</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16 flex-grow">
+        <div id="loading" class="text-center py-20">
+            <i class="fas fa-spinner fa-spin text-4xl text-sky-600"></i>
+            <p class="mt-4 text-gray-500">Memuat detail produk...</p>
+        </div>
+
+        <div id="product-content" class="max-w-6xl mx-auto px-4 hidden">
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <!-- Left Column: Details -->
+                <div class="animate-fadeIn">
+                    <div id="product-tag"
+                        class="inline-flex items-center px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold mb-4">
+                        <i class="fas fa-tag mr-2"></i><span id="category-text">Category</span>
+                    </div>
+                    <h1 id="product-title" class="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        Product Title</h1>
+                    <p id="product-description" class="text-lg text-gray-600 mb-8 leading-relaxed">Product description
+                        goes here.</p>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-8">
+                        <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-2"></i> Fitur Utama
+                        </h3>
+                        <ul id="product-features" class="space-y-3 text-gray-700">
+                            <!-- Features will be injected here -->
+                        </ul>
+                    </div>
+
+                    <div class="flex items-baseline space-x-3 mb-8">
+                        <span id="product-price" class="text-4xl font-bold text-sky-600">Rp0</span>
+                        <span id="product-price-note" class="text-gray-400 text-sm">/ license</span>
+                    </div>
+
+                    <!-- Payment Methods (Static for now) -->
+                    <div class="mb-8">
+                        <p class="text-sm text-gray-500 mb-2">Metode Pembayaran:</p>
+                        <div class="flex space-x-3 text-2xl text-gray-400">
+                            <i class="fas fa-university" title="Bank Transfer"></i>
+                            <i class="fas fa-wallet" title="E-Wallet"></i>
+                            <i class="fas fa-qrcode" title="QRIS"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Card & CTA -->
+                <div class="relative animate-slideIn">
+                    <div
+                        class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 transform transition hover:-translate-y-1 hover:shadow-2xl">
+                        <div class="h-64 overflow-hidden relative">
+                            <img id="product-image" src="" alt="Product" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Tertarik dengan tools ini?</h3>
+                            <p class="text-gray-600 mb-6 text-sm">Klik tombol di bawah untuk memesan via WhatsApp. Admin
+                                kami akan segera memproses pesanan Anda.</p>
+
+                            <div id="order-preview"
+                                class="bg-gray-50 rounded-lg p-4 mb-6 text-xs text-gray-500 font-mono border border-gray-200">
+                                <!-- Order template preview -->
+                            </div>
+
+                            <a id="whatsapp-link" href="#" target="_blank"
+                                class="block w-full text-center px-6 py-4 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold shadow-lg hover:shadow-green-200 hover:from-green-600 hover:to-emerald-700 transition-all transform hover:-translate-y-0.5">
+                                <i class="fab fa-whatsapp text-xl mr-2"></i> Pesan Sekarang
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Decor element -->
+                    <div
+                        class="absolute -z-10 top-10 -right-10 w-64 h-64 bg-sky-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Not Found State -->
+        <div id="not-found" class="hidden text-center py-20 max-w-2xl mx-auto px-4">
+            <div class="text-6xl text-gray-300 mb-6"><i class="fas fa-search"></i></div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Produk Tidak Ditemukan</h2>
+            <p class="text-gray-600 mb-8">Maaf, produk yang Anda cari tidak tersedia atau link salah.</p>
+            <a href="index.html"
+                class="inline-flex items-center px-6 py-3 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition">
+                Kembali ke Beranda
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center ">
+            <p class="text-gray-500 text-sm">&copy; 2025 soryna. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id');
+
+            const product = projects.find(p => p.id === productId);
+            const loading = document.getElementById('loading');
+            const content = document.getElementById('product-content');
+            const notFound = document.getElementById('not-found');
+
+            setTimeout(() => {
+                loading.classList.add('hidden');
+
+                if (product) {
+                    content.classList.remove('hidden');
+
+                    // Inject Content
+                    document.title = `${product.title} - soryna`;
+                    document.getElementById('product-title').textContent = product.title;
+                    document.getElementById('category-text').textContent = product.category;
+                    document.getElementById('product-description').textContent = product.longDescription || product.description;
+                    document.getElementById('product-price').textContent = product.price;
+                    document.getElementById('product-price-note').textContent = product.priceNote || '';
+                    document.getElementById('product-image').src = product.image;
+
+                    // Features
+                    const featuresList = document.getElementById('product-features');
+                    if (product.features && product.features.length > 0) {
+                        product.features.forEach(feature => {
+                            const li = document.createElement('li');
+                            li.className = 'flex items-start';
+                            li.innerHTML = `<i class="fas fa-check-circle text-sky-500 mt-1 mr-3 flex-shrink-0"></i><span>${feature}</span>`;
+                            featuresList.appendChild(li);
+                        });
+                    } else {
+                        featuresList.innerHTML = '<li class="text-gray-500 italic">Tidak ada detail fitur.</li>';
+                    }
+
+                    // WhatsApp Link
+                    const waNumber = "6281234567890"; // Ganti dengan nomor asli
+                    const template = product.whatsappTemplate || `[ORDER ${product.title.toUpperCase()}]`;
+                    const encodedMsg = encodeURIComponent(template);
+
+                    document.getElementById('whatsapp-link').href = `https://wa.me/${waNumber}?text=${encodedMsg}`;
+                    document.getElementById('order-preview').textContent = template;
+
+                } else {
+                    notFound.classList.remove('hidden');
+                }
+            }, 300); // Fake Loading for aesthetic
+        });
+    </script>
+    <style>
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-slideIn {
+            animation: slideIn 0.6s ease-out 0.2s forwards;
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</body>
+
+</html>

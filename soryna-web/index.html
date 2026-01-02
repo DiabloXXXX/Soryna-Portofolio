@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>soryna - Web Development & AI/ML Solutions</title>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body class="bg-gradient-to-br from-pink-50 via-purple-50 to-white">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-sm shadow-lg fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#home"
+                        class="text-2xl font-extrabold tracking-tight text-sky-700 hover:text-sky-800 transition-colors">
+                        <span class="align-middle">sory</span><span class="align-middle text-sky-500">na</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-1">
+                        <a href="#home"
+                            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Home</a>
+                        <a href="#about"
+                            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">About</a>
+                        <a href="#services"
+                            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Services</a>
+                        <a href="#catalog"
+                            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Catalog</a>
+                        <a href="#portfolio"
+                            class="portfolio-link px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Portfolio</a>
+                        <a href="#contact"
+                            class="ml-4 px-6 py-2 rounded-lg text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 transition-all transform hover:-translate-y-0.5 shadow-lg hover:shadow-purple-200">Contact
+                            Us</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button
+                        class="mobile-menu-button p-2 rounded-lg text-gray-700 hover:bg-indigo-50 transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden bg-white shadow-lg rounded-lg mx-4 mt-2 py-2">
+            <a href="#home" class="block px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50">Home</a>
+            <a href="#about" class="block px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50">About</a>
+            <a href="#services" class="block px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50">Services</a>
+            <a href="#catalog" class="block px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50">Catalog</a>
+            <a href="#portfolio"
+                class="block px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50 portfolio-link">Portfolio</a>
+            <a href="#contact"
+                class="block px-4 py-3 text-sm text-white bg-gradient-to-r from-indigo-600 to-cyan-500 mx-4 my-2 rounded-lg text-center">Contact
+                Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home"
+        class="pt-32 pb-20 md:pt-40 md:pb-32 px-4 bg-gradient-to-br from-indigo-50 via-white to-cyan-50 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                <div
+                    class="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+                </div>
+                <div
+                    class="absolute top-1/3 right-1/4 w-64 h-64 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+                </div>
+                <div
+                    class="absolute bottom-1/4 left-1/2 w-64 h-64 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000">
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="inline-block px-4 py-2 mb-6 bg-indigo-100 text-indigo-800 text-sm font-medium rounded-full">
+                <span class="relative flex h-3 w-3 float-left mr-2 mt-1.5">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+                </span>
+                We're accepting new projects
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+                <span class="block">Building Digital</span>
+                <span class="block text-sky-700">Experiences</span>
+                <span class="block">That Matter</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">We craft beautiful websites and
+                intelligent AI/ML solutions that help businesses thrive in the digital world.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact"
+                    class="px-8 py-4 bg-purple-600 text-white font-medium rounded-full hover:bg-purple-700 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-purple-200 inline-flex items-center">
+                    Start Your Project
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+                <a href="#portfolio"
+                    class="portfolio-link px-8 py-4 border-2 border-indigo-600 text-indigo-600 font-medium rounded-full hover:bg-indigo-50 transition-colors inline-flex items-center">
+                    View Our Work
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="max-w-7xl mx-auto mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
+            <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center"
+                data-aos="fade-up">
+                <div class="text-4xl font-bold text-indigo-600 mb-2">50+</div>
+                <div class="text-gray-600">Projects Completed</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center"
+                data-aos="fade-up" data-aos-delay="100">
+                <div class="text-4xl font-bold text-cyan-500 mb-2">30+</div>
+                <div class="text-gray-600">Happy Clients</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center"
+                data-aos="fade-up" data-aos-delay="200">
+                <div class="text-4xl font-bold text-purple-500 mb-2">15+</div>
+                <div class="text-gray-600">AI Solutions</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center"
+                data-aos="fade-up" data-aos-delay="300">
+                <div class="text-4xl font-bold text-indigo-400 mb-2">5+</div>
+                <div class="text-gray-600">Years Experience</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <!-- Left Content -->
+                <div data-aos="fade-right">
+                    <span class="text-sky-600 font-semibold tracking-wide uppercase text-sm mb-2 block">Tentang
+                        Kami</span>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6 leading-tight">Mitra Teknologi Terpercaya untuk
+                        Transformasi Digital Anda</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        soryna bukan sekadar pengembang software. Kami adalah partner strategis yang membantu bisnis
+                        Anda beradaptasi dan berkembang di era digital.
+                    </p>
+                    <p class="text-gray-600 mb-8">
+                        Dengan kombinasi keahlian teknis dan pemahaman bisnis yang mendalam, kami menciptakan solusi
+                        yang tidak hanya canggih secara teknologi, tetapi juga berdampak nyata pada pertumbuhan
+                        bottom-line Anda.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-bold text-sky-600 mb-1">5+</span>
+                            <span class="text-sm text-gray-500">Tahun Pengalaman</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-bold text-sky-600 mb-1">50+</span>
+                            <span class="text-sm text-gray-500">Proyek Sukses</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Image Grid -->
+                <div class="relative" data-aos="fade-left">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+                            alt="Team collaborating"
+                            class="rounded-2xl shadow-lg w-full h-64 object-cover transform translate-y-8">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+                            alt="Strategic meeting" class="rounded-2xl shadow-lg w-full h-64 object-cover">
+                    </div>
+                    <!-- Decorative dot pattern -->
+                    <div class="absolute -z-10 top-0 right-0 -mr-8 -mt-8 text-sky-100">
+                        <svg width="100" height="100" fill="currentColor" viewBox="0 0 100 100">
+                            <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <circle cx="2" cy="2" r="2"></circle>
+                            </pattern>
+                            <rect width="100" height="100" fill="url(#dots)"></rect>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span
+                    class="inline-block px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium mb-4">Our
+                    Services</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">What We Offer</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-cyan-500 mx-auto"></div>
+                <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">We provide cutting-edge web development and
+                    AI/ML solutions tailored to your business needs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Web Development Service -->
+                <a href="web-development.html" class="service-card group block" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4m-8 0l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Web Development</h3>
+                    <p class="text-gray-600 mb-4">Custom website and web application development tailored to your
+                        business needs.</p>
+                    <span class="text-indigo-600 group-hover:text-indigo-800 font-medium inline-flex items-center">
+                        Lihat Harga <i class="fas fa-arrow-right ml-2 text-indigo-400"></i>
+                    </span>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Responsive Design
+                        </li>
+                        <li class="flex items-center justify-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            E-commerce Solutions
+                        </li>
+                        <li class="flex items-center justify-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            CMS Integration
+                        </li>
+                    </ul>
+                </a>
+
+                <!-- AI/ML Service -->
+                <a href="ai-ml-solutions.html" class="service-card group block" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">AI & Machine Learning</h3>
+                    <p class="text-gray-600 mb-4">Intelligent solutions powered by artificial intelligence and machine
+                        learning.</p>
+                    <span class="text-indigo-600 group-hover:text-indigo-800 font-medium inline-flex items-center">
+                        Lihat Harga <i class="fas fa-arrow-right ml-2 text-indigo-400"></i>
+                    </span>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Predictive Analytics
+                        </li>
+                        <li class="flex items-center justify-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Computer Vision
+                        </li>
+                        <li class="flex items-center justify-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Natural Language Processing
+                        </li>
+                    </ul>
+                </a>
+
+                <!-- Custom Solutions -->
+                <div onclick="openCustomSolutionModal()" class="service-card group cursor-pointer" data-aos="fade-up"
+                    data-aos-delay="300">
+                    <div class="service-icon">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Custom Solutions</h3>
+                    <p class="text-gray-600 mb-4">Tailored IT solutions designed specifically for your unique business
+                        requirements.</p>
+                    <span class="text-indigo-600 group-hover:text-indigo-800 font-medium inline-flex items-center">
+                        Request Now <i class="fas fa-arrow-right ml-2 text-indigo-400"></i>
+                    </span>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Custom Web Applications
+                        </li>
+                        <li class="flex items-center justify-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            API Development
+                        </li>
+                        <li class="flex items-center justify-center text-gray-600">
+                            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            System Integration
+                        </li>
+                    </ul>
+                    <a href="#contact"
+                        class="mt-6 inline-flex items-center text-indigo-600 font-medium group-hover:text-indigo-800 transition-colors">
+                        Learn more
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span
+                    class="inline-block px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium mb-4">Our
+                    Work</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Portfolio Showcase</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-600 to-cyan-500 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore our latest projects and see how we've
+                    transformed ideas into successful digital solutions.</p>
+            </div>
+
+            <!-- Portfolio Filter -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="100">
+                <button
+                    class="px-4 py-2 rounded-full text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
+                    data-filter="all">All Projects</button>
+                <button
+                    class="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 hover:bg-gray-100 transition-colors"
+                    data-filter="web">Web Development</button>
+                <button
+                    class="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 hover:bg-gray-100 transition-colors"
+                    data-filter="ai">AI/ML Solutions</button>
+                <button
+                    class="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 hover:bg-gray-100 transition-colors"
+                    data-filter="tools">Tools & Bots</button>
+                <button
+                    class="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 hover:bg-gray-100 transition-colors"
+                    data-filter="mobile">Mobile Apps</button>
+            </div>
+
+            <!-- Dynamic Portfolio Grid -->
+            <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Javascript will load content here -->
+                <div class="col-span-full text-center py-20 text-gray-500">
+                    <i class="fas fa-spinner fa-spin mr-2"></i> Loading projects...
+                </div>
+            </div>
+
+            <script src="js/data.js"></script>
+            <script>
+                function renderPortfolio(filter = 'all') {
+                    const grid = document.getElementById('portfolio-grid');
+                    grid.innerHTML = '';
+
+                    if (!projects || projects.length === 0) {
+                        grid.innerHTML = '<p class="col-span-full text-center">No projects found.</p>';
+                        return;
+                    }
+
+                    projects.forEach(project => {
+                        // Simple matching for categories
+                        let match = false;
+                        if (filter === 'all') match = true;
+                        else if (filter === 'tools' && project.category === 'Tools') match = true;
+                        else if (filter === 'ai' && project.category === 'AI/ML Solutions') match = true;
+                        else if (filter === 'web' && project.category === 'Web Development') match = true;
+                        else if (filter === 'mobile' && project.category === 'Mobile Apps') match = true; // No mobile apps yet in dummy data
+
+                        if (match) {
+                            const card = document.createElement('div');
+                            card.className = 'portfolio-item group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300';
+                            card.style.animation = 'fadeIn 0.5s forwards';
+
+                            card.innerHTML = `
+                                <div class="relative overflow-hidden h-64 bg-gray-200">
+                                    <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
+                                        <div>
+                                            <h3 class="text-white text-xl font-semibold mb-2">${project.title}</h3>
+                                            <p class="text-pink-200">${project.category}</p>
+                                            <a href="${project.link}" class="inline-block mt-3 px-4 py-2 bg-white text-indigo-600 rounded-full text-sm font-semibold hover:bg-indigo-50 transition">View Project</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            grid.appendChild(card);
+                        }
+                    });
+                }
+
+                // Initial render
+                document.addEventListener('DOMContentLoaded', () => {
+                    // Ensure data is loaded
+                    if (typeof projects !== 'undefined') {
+                        renderPortfolio();
+                    }
+
+                    const filterButtons = document.querySelectorAll('[data-filter]');
+                    filterButtons.forEach(button => {
+                        button.addEventListener('click', () => {
+                            filterButtons.forEach(btn => {
+                                btn.classList.remove('bg-indigo-600', 'text-white', 'hover:bg-indigo-700');
+                                btn.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100');
+                            });
+                            button.classList.remove('bg-white', 'text-gray-700', 'hover:bg-gray-100');
+                            button.classList.add('bg-indigo-600', 'text-white', 'hover:bg-indigo-700');
+
+                            const filter = button.getAttribute('data-filter');
+                            renderPortfolio(filter);
+                        });
+                    });
+                });
+            </script>
+
+            <div class="text-center mt-12">
+                <a href="#contact"
+                    class="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium rounded-full hover:from-pink-600 hover:to-purple-700 transition duration-300 inline-flex items-center">
+                    Start Your Project <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gradient-to-br from-pink-50 via-purple-50 to-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-purple-600 mx-auto mb-8"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Don't just take our word for it. Here's what our clients have
+                    to say about working with us.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-2xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"soryna transformed our online presence with their exceptional web
+                        development skills. Their team was professional, responsive, and delivered beyond our
+                        expectations."</p>
+                    <div class="flex items-center">
+                        <div
+                            class="h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-bold text-xl mr-4">
+                            JD</div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">John Doe</h4>
+                            <p class="text-sm text-gray-500">CEO, TechStart Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-2xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"The mobile app developed by soryna has significantly improved our
+                        customer engagement. Their attention to detail and user experience is remarkable."</p>
+                    <div class="flex items-center">
+                        <div
+                            class="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xl mr-4">
+                            AS</div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Amanda Smith</h4>
+                            <p class="text-sm text-gray-500">Marketing Director, BrandUp</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-2xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Their cloud solutions have streamlined our operations and improved
+                        our efficiency. The team at soryna is knowledgeable and a pleasure to work with."</p>
+                    <div class="flex items-center">
+                        <div
+                            class="h-12 w-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-bold text-xl mr-4">
+                            RJ</div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Robert Johnson</h4>
+                            <p class="text-sm text-gray-500">CTO, CloudScale</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-purple-600 mb-8"></div>
+                    <p class="text-gray-600 mb-8">Have a project in mind or want to learn more about our services? Fill
+                        out the form and our team will get back to you as soon as possible.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Our Location</h3>
+                                <p class="text-gray-600">123 Tech Street, Silicon Valley, CA 94025</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Phone Number</h3>
+                                <p class="text-gray-600">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Email Address</h3>
+                                <p class="text-gray-600">info@pantechcorp.com</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-4 mt-8">
+                            <a href="#"
+                                class="h-10 w-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-pink-200 transition duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#"
+                                class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 hover:bg-purple-200 transition duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#"
+                                class="h-10 w-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-pink-200 transition duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#"
+                                class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 hover:bg-purple-200 transition duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-xl">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Send Us a Message</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name <span
+                                        class="text-red-500">*</span></label>
+                                <input type="text" id="name" name="name"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address
+                                    <span class="text-red-500">*</span></label>
+                                <input type="email" id="email" name="email"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                                    required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                            <input type="text" id="subject" name="subject"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message <span
+                                    class="text-red-500">*</span></label>
+                            <textarea id="message" name="message" rows="4"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                                required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit"
+                                class="w-full px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium rounded-md hover:from-pink-600 hover:to-purple-700 transition duration-300">Send
+                                Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-extrabold tracking-tight text-sky-100 mb-4">
+                        <span class="align-middle">sory</span><span class="align-middle text-sky-400">na</span>
+                    </h3>
+                    <p class="text-gray-400 mb-6">Innovative technology solutions for the digital age. We help
+                        businesses transform and thrive through cutting-edge technology and expert consulting.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-pink-500 transition duration-300">Home</a>
+                        </li>
+                        <li><a href="#about" class="text-gray-400 hover:text-pink-500 transition duration-300">About
+                                Us</a></li>
+                        <li><a href="#services"
+                                class="text-gray-400 hover:text-pink-500 transition duration-300">Services</a></li>
+                        <li><a href="#portfolio"
+                                class="text-gray-400 hover:text-pink-500 transition duration-300">Portfolio</a></li>
+                        <li><a href="#contact"
+                                class="text-gray-400 hover:text-pink-500 transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-pink-500 transition duration-300">Web
+                                Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-pink-500 transition duration-300">Mobile App
+                                Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-pink-500 transition duration-300">AI & Machine
+                                Learning</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-pink-500 transition duration-300">Cloud
+                                Solutions</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-pink-500 transition duration-300">Cybersecurity</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 soryna. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/6281234567890?text=Halo%20soryna,%20saya%20tertarik%20dengan%20projek%20anda" target="_blank"
+        class="fixed bottom-8 right-8 z-50 w-16 h-16 bg-green-500 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-green-600 hover:scale-110 transition-all duration-300 animate-bounce-slow">
+        <i class="fab fa-whatsapp text-4xl"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top"
+        class="fixed bottom-8 left-8 bg-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-pink-600 hover:bg-pink-100 transition duration-300 z-40 hidden">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- script.js removed (legacy code) -->
+
+    <!-- Load libraries -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+    </script>
+</body>
+
+</html>

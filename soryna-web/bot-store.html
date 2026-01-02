@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Store - AI Bot Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Bot Catalog Grid */
+        .bot-catalog {
+            padding: 60px 0;
+        }
+
+        .catalog-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .bot-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bot-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .bot-card:hover::before {
+            opacity: 1;
+        }
+
+        .bot-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .bot-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .bot-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .bot-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .btn-detail {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-detail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-detail::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-detail:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Modal Detail Bot */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            background: linear-gradient(135deg, rgba(15, 12, 41, 0.95) 0%, rgba(48, 43, 99, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #ffffff;
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .detail-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .detail-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .detail-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .features-section {
+            margin-bottom: 40px;
+        }
+
+        .features-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Pricing Cards */
+        .pricing-section {
+            margin: 40px 0;
+        }
+
+        .pricing-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #667eea;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .pricing-card.featured {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'POPULER';
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .btn-order {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .btn-order:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Order Form */
+        .order-form {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-submit:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .bot-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .modal-content {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Bot Store</h1>
+            <p>Temukan dan beli AI bot terbaik untuk meningkatkan produktivitas bisnis Anda</p>
+        </div>
+    </section>
+
+    <!-- Bot Catalog -->
+    <section class="bot-catalog">
+        <div class="container">
+            <h2 class="catalog-title">Katalog Bot</h2>
+            <div class="bot-grid" id="botGrid">
+                <!-- Bot cards will be generated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Detail Bot -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalBody">
+                <!-- Modal content will be generated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Bot Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Bot data
+        const bots = [
+            {
+                id: 1,
+                name: "Customer Service Bot",
+                icon: "🤖",
+                description: "Bot customer service otomatis yang siap membantu 24/7",
+                price: "Rp 500.000/bulan",
+                fullDescription: "Customer Service Bot adalah solusi AI cerdas untuk mengelola interaksi pelanggan Anda secara otomatis. Bot ini dilengkapi dengan NLP canggih yang memahami berbagai jenis pertanyaan pelanggan.",
+                features: [
+                    "Respon otomatis 24/7",
+                    "Integrasi dengan WhatsApp, Telegram, dan website",
+                    "Analytics dashboard real-time",
+                    "Multi-bahasa support",
+                    "Custom conversation flow"
+                ],
+                useCase: "Ideal untuk e-commerce, startup, dan perusahaan yang ingin meningkatkan layanan pelanggan tanpa menambah biaya operasional.",
+                technology: ["AI/ML", "NLP", "Node.js", "MongoDB", "REST API"],
+                demoOutput: "Pelanggan: 'Halo, saya ingin tanya status pesanan saya'\nBot: 'Halo! Pesanan Anda dengan nomor #12345 sudah dikirim dan akan tiba besok. Tracking number: JNE-001234567'",
+                pricing: [
+                    {
+                        name: "Basic",
+                        price: "Rp 500.000/bulan",
+                        features: [
+                            "500 conversations/bulan",
+                            "1 platform integration",
+                            "Basic analytics",
+                            "Email support"
+                        ]
+                    },
+                    {
+                        name: "Pro",
+                        price: "Rp 1.500.000/bulan",
+                        features: [
+                            "Unlimited conversations",
+                            "3 platform integrations",
+                            "Advanced analytics",
+                            "Priority support",
+                            "Custom branding"
+                        ]
+                    },
+                    {
+                        name: "Enterprise",
+                        price: "Rp 5.000.000/bulan",
+                        features: [
+                            "Unlimited everything",
+                            "Unlimited integrations",
+                            "Custom AI training",
+                            "Dedicated server",
+                            "24/7 phone support + SLA"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "Social Media Manager",
+                icon: "📱",
+                description: "Kelola semua social media Anda dengan AI otomatis",
+                price: "Rp 750.000/bulan",
+                fullDescription: "Social Media Manager Bot adalah solusi komprehensif untuk mengelola presence social media Anda secara otomatis. Dari content creation hingga scheduling, semuanya terintegrasi dalam satu platform.",
+                features: [
+                    "Auto content generation",
+                    "Multi-platform posting",
+                    "Engagement analytics",
+                    "Trend detection",
+                    "Competitor monitoring"
+                ],
+                useCase: "Perfect untuk digital marketers, social media managers, dan bisnis yang ingin meningkatkan engagement social media.",
+                technology: ["GPT-4", "Computer Vision", "Python", "PostgreSQL", "GraphQL"],
+                demoOutput: "Bot: 'Trending topic detected: #TechTuesday. Suggested post: \"5 teknologi AI yang akan mengubah 2024. Swipe left untuk detail! 🚀 #TechTuesday #AI #Innovation\"'",
+                pricing: [
+                    {
+                        name: "Basic",
+                        price: "Rp 750.000/bulan",
+                        features: [
+                            "3 social media accounts",
+                            "30 posts/bulan",
+                            "Basic analytics",
+                            "Content suggestions"
+                        ]
+                    },
+                    {
+                        name: "Pro",
+                        price: "Rp 2.000.000/bulan",
+                        features: [
+                            "10 social media accounts",
+                            "Unlimited posts",
+                            "Advanced analytics",
+                            "AI content creation",
+                            "Team collaboration"
+                        ]
+                    },
+                    {
+                        name: "Enterprise",
+                        price: "Rp 7.000.000/bulan",
+                        features: [
+                            "Unlimited accounts",
+                            "Unlimited everything",
+                            "Custom AI training",
+                            "White-label solution",
+                            "24/7 dedicated support"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 3,
+                name: "Data Analytics Bot",
+                icon: "📊",
+                description: "Analisis data real-time dengan AI insights",
+                price: "Rp 1.000.000/bulan",
+                fullDescription: "Data Analytics Bot adalah platform analisis data cerdas yang memberikan insights real-time dari berbagai sumber data. Dengan machine learning algorithms, bot ini dapat mengidentifikasi patterns dan trends yang tidak terlihat.",
+                features: [
+                    "Real-time data processing",
+                    "Predictive analytics",
+                    "Custom dashboard",
+                    "Automated reporting",
+                    "Anomaly detection"
+                ],
+                useCase: "Ideal untuk data analysts, business intelligence teams, dan perusahaan yang ingin membuat data-driven decisions.",
+                technology: ["TensorFlow", "Apache Spark", "Python", "Redis", "Docker"],
+                demoOutput: "Bot: '🔍 Alert: Sales Q3 increased 23% YoY. Main driver: Product category A (+45%). Recommendation: Increase inventory for category A by 30%.'",
+                pricing: [
+                    {
+                        name: "Basic",
+                        price: "Rp 1.000.000/bulan",
+                        features: [
+                            "1M data points/bulan",
+                            "5 data sources",
+                            "Basic visualizations",
+                            "Weekly reports"
+                        ]
+                    },
+                    {
+                        name: "Pro",
+                        price: "Rp 3.000.000/bulan",
+                        features: [
+                            "10M data points/bulan",
+                            "20 data sources",
+                            "Advanced visualizations",
+                            "Real-time alerts",
+                            "ML models"
+                        ]
+                    },
+                    {
+                        name: "Enterprise",
+                        price: "Rp 10.000.000/bulan",
+                        features: [
+                            "Unlimited data points",
+                            "Unlimited sources",
+                            "Custom ML training",
+                            "On-premise deployment",
+                            "24/7 engineering support"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 4,
+                name: "HR Assistant Bot",
+                icon: "💼",
+                description: "Automatisasi proses HR dan recruitment",
+                price: "Rp 600.000/bulan",
+                fullDescription: "HR Assistant Bot adalah solusi AI untuk mengotomatisasi berbagai proses HR mulai dari recruitment hingga employee management. Bot ini menggunakan advanced NLP untuk memahami kebutuhan HR modern.",
+                features: [
+                    "Resume screening otomatis",
+                    "Interview scheduling",
+                    "Employee onboarding",
+                    "Performance tracking",
+                    "Leave management"
+                ],
+                useCase: "Perfect untuk HR departments, recruitment agencies, dan growing companies yang ingin streamline proses HR.",
+                technology: ["NLP", "Computer Vision", "Node.js", "MySQL", "WebRTC"],
+                demoOutput: "Bot: '📋 New application received for Senior Developer position. Match score: 92%. Key skills: React, Node.js, AWS. Recommended next step: Schedule technical interview.'",
+                pricing: [
+                    {
+                        name: "Basic",
+                        price: "Rp 600.000/bulan",
+                        features: [
+                            "50 applications/bulan",
+                            "Basic screening",
+                            "Email integration",
+                            "Standard templates"
+                        ]
+                    },
+                    {
+                        name: "Pro",
+                        price: "Rp 1.800.000/bulan",
+                        features: [
+                            "200 applications/bulan",
+                            "Advanced screening",
+                            "Video interview",
+                            "Custom workflows",
+                            "Analytics dashboard"
+                        ]
+                    },
+                    {
+                        name: "Enterprise",
+                        price: "Rp 6.000.000/bulan",
+                        features: [
+                            "Unlimited applications",
+                            "AI-powered matching",
+                            "Full ATS integration",
+                            "Custom training data",
+                            "24/7 HR support"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: "E-commerce Assistant",
+                icon: "🛒",
+                description: "Boost sales dengan AI-powered shopping assistant",
+                price: "Rp 800.000/bulan",
+                fullDescription: "E-commerce Assistant Bot adalah shopping assistant cerdas yang meningkatkan conversion rate dan customer satisfaction. Bot ini menggunakan recommendation algorithms dan personalization untuk setiap customer.",
+                features: [
+                    "Product recommendations",
+                    "Personalized shopping",
+                    "Cart recovery",
+                    "Customer segmentation",
+                    "Sales optimization"
+                ],
+                useCase: "Ideal untuk e-commerce platforms, online retailers, dan businesses yang ingin meningkatkan online sales.",
+                technology: ["Collaborative Filtering", "React", "MongoDB", "Redis", "Stripe API"],
+                demoOutput: "Bot: '🛍️ Based on your browsing history, you might like: Premium Wireless Headphones (4.8⭐). 15% off today only! Complete your tech setup with our recommended accessories.'",
+                pricing: [
+                    {
+                        name: "Basic",
+                        price: "Rp 800.000/bulan",
+                        features: [
+                            "1.000 orders/bulan",
+                            "Basic recommendations",
+                            "Email recovery",
+                            "Standard analytics"
+                        ]
+                    },
+                    {
+                        name: "Pro",
+                        price: "Rp 2.500.000/bulan",
+                        features: [
+                            "5.000 orders/bulan",
+                            "AI recommendations",
+                            "Multi-channel recovery",
+                            "A/B testing",
+                            "Advanced analytics"
+                        ]
+                    },
+                    {
+                        name: "Enterprise",
+                        price: "Rp 8.000.000/bulan",
+                        features: [
+                            "Unlimited orders",
+                            "Custom AI models",
+                            "Full integration",
+                            "Dedicated infrastructure",
+                            "24/7 technical support"
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 6,
+                name: "Content Creator Bot",
+                icon: "✍️",
+                description: "Generate konten berkualitas dengan AI dalam hitungan detik",
+                price: "Rp 400.000/bulan",
+                fullDescription: "Content Creator Bot adalah platform AI-powered content generation yang menghasilkan artikel, blog posts, social media content, dan marketing copy yang SEO-optimized dan engaging.",
+                features: [
+                    "Multi-format content creation",
+                    "SEO optimization",
+                    "Tone adjustment",
+                    "Plagiarism check",
+                    "Content calendar"
+                ],
+                useCase: "Perfect untuk content marketers, bloggers, social media managers, dan businesses yang need consistent content production.",
+                technology: ["GPT-4", "BERT", "Python", "Elasticsearch", "Copyscape API"],
+                demoOutput: "Bot: '📝 New blog post generated: \"10 Ways AI Can Transform Your Small Business in 2024\". Word count: 1,200. SEO score: 95%. Ready for review!'",
+                pricing: [
+                    {
+                        name: "Basic",
+                        price: "Rp 400.000/bulan",
+                        features: [
+                            "10 articles/bulan",
+                            "Basic SEO",
+                            "3 content types",
+                            "English only"
+                        ]
+                    },
+                    {
+                        name: "Pro",
+                        price: "Rp 1.200.000/bulan",
+                        features: [
+                            "50 articles/bulan",
+                            "Advanced SEO",
+                            "10 content types",
+                            "Multi-language",
+                            "Brand voice training"
+                        ]
+                    },
+                    {
+                        name: "Enterprise",
+                        price: "Rp 4.000.000/bulan",
+                        features: [
+                            "Unlimited content",
+                            "Custom AI training",
+                            "Full API access",
+                            "White-label solution",
+                            "24/7 content support"
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Initialize bot catalog
+        function initializeCatalog() {
+            const botGrid = document.getElementById('botGrid');
+            
+            bots.forEach(bot => {
+                const botCard = document.createElement('div');
+                botCard.className = 'bot-card';
+                botCard.innerHTML = `
+                    <div class="bot-icon">${bot.icon}</div>
+                    <h3 class="bot-name">${bot.name}</h3>
+                    <p class="bot-description">${bot.description}</p>
+                    <div class="bot-price">${bot.price}</div>
+                    <button class="btn-detail" onclick="showBotDetail(${bot.id})">Lihat Detail</button>
+                `;
+                botGrid.appendChild(botCard);
+            });
+        }
+
+        // Show bot detail in modal
+        function showBotDetail(botId) {
+            const bot = bots.find(b => b.id === botId);
+            if (!bot) return;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="detail-header">
+                    <div class="detail-icon">${bot.icon}</div>
+                    <div class="detail-info">
+                        <h2>${bot.name}</h2>
+                        <div class="bot-price">${bot.price}</div>
+                    </div>
+                </div>
+
+                <div class="detail-description">
+                    <h3>Deskripsi Lengkap</h3>
+                    <p>${bot.fullDescription}</p>
+                </div>
+
+                <div class="features-section">
+                    <h3 class="features-title">Fitur Utama</h3>
+                    <ul class="features-list">
+                        ${bot.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="features-section">
+                    <h3 class="features-title">Use Case</h3>
+                    <p>${bot.useCase}</p>
+                </div>
+
+                <div class="features-section">
+                    <h3 class="features-title">Teknologi</h3>
+                    <p>${bot.technology.join(', ')}</p>
+                </div>
+
+                <div class="features-section">
+                    <h3 class="features-title">Contoh Demo Output</h3>
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; font-family: monospace; white-space: pre-line;">
+${bot.demoOutput}
+                    </div>
+                </div>
+
+                <div class="pricing-section">
+                    <h3 class="pricing-title">Paket Harga</h3>
+                    <div class="pricing-grid">
+                        ${bot.pricing.map((plan, index) => `
+                            <div class="pricing-card ${index === 1 ? 'featured' : ''}">
+                                <div class="plan-name">${plan.name}</div>
+                                <div class="plan-price">${plan.price}</div>
+                                <ul class="plan-features">
+                                    ${plan.features.map(feature => `<li>${feature}</li>`).join('')}
+                                </ul>
+                                <button class="btn-order" onclick="showOrderForm('${bot.name}', '${plan.name}', '${plan.price}')">
+                                    Order Sekarang
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div id="orderForm" class="order-form">
+                    <h3>Form Pemesanan</h3>
+                    <form onsubmit="submitOrder(event)">
+                        <div class="form-group">
+                            <label>Nama Lengkap</label>
+                            <input type="text" required placeholder="Masukkan nama lengkap Anda">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" required placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Perusahaan</label>
+                            <input type="text" placeholder="Nama perusahaan (opsional)">
+                        </div>
+                        <div class="form-group">
+                            <label>No. Telepon</label>
+                            <input type="tel" required placeholder="+62 812-3456-7890">
+                        </div>
+                        <div class="form-group">
+                            <label>Pesan Tambahan</label>
+                            <textarea rows="4" placeholder="Ceritakan kebutuhan Anda..."></textarea>
+                        </div>
+                        <input type="hidden" id="botName" value="">
+                        <input type="hidden" id="planName" value="">
+                        <input type="hidden" id="planPrice" value="">
+                        <button type="submit" class="btn-submit">Submit Order</button>
+                    </form>
+                </div>
+            `;
+
+            document.getElementById('detailModal').style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        // Show order form
+        function showOrderForm(botName, planName, planPrice) {
+            document.getElementById('botName').value = botName;
+            document.getElementById('planName').value = planName;
+            document.getElementById('planPrice').value = planPrice;
+            document.getElementById('orderForm').style.display = 'block';
+            document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Submit order
+        function submitOrder(event) {
+            event.preventDefault();
+            
+            const formData = {
+                botName: document.getElementById('botName').value,
+                planName: document.getElementById('planName').value,
+                planPrice: document.getElementById('planPrice').value,
+                name: event.target[0].value,
+                email: event.target[1].value,
+                company: event.target[2].value,
+                phone: event.target[3].value,
+                message: event.target[4].value
+            };
+
+            // Simulate order submission
+            alert(`Terima kasih! Order Anda untuk ${formData.botName} - ${formData.planName} telah diterima. Kami akan menghubungi Anda segera di ${formData.email}.`);
+            
+            // Reset form
+            event.target.reset();
+            document.getElementById('orderForm').style.display = 'none';
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeCatalog);
+    </script>
+</body>
+</html>

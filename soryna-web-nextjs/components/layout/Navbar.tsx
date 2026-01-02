@@ -109,7 +109,9 @@ export default function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className={`md:hidden border-t overflow-hidden ${isDark ? 'bg-gray-950 border-white/5' : 'bg-white border-gray-100'
+                        className={`md:hidden border-t overflow-hidden ${isDark
+                            ? 'bg-gray-950 border-white/5'
+                            : 'bg-white border-gray-200 shadow-lg'
                             }`}
                     >
                         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -120,7 +122,7 @@ export default function Navbar() {
                                         onClick={() => scrollToSection(item)}
                                         className={`${focusStyles} block w-full text-left px-4 py-3 rounded-xl transition-colors font-medium active:opacity-90 ${isDark
                                             ? 'text-gray-300 hover:text-white hover:bg-white/5'
-                                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
                                             }`}
                                     >
                                         {item}
