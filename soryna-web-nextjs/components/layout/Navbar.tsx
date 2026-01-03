@@ -32,10 +32,22 @@ export default function Navbar() {
         };
 
         const sectionId = sectionMap[label] || label.toLowerCase();
-        const el = document.getElementById(sectionId);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
+        const element = document.getElementById(sectionId);
+
+        if (element) {
+            // Close mobile menu first
             setIsMobileMenuOpen(false);
+
+            // Calculate offset for fixed navbar (navbar height + some padding)
+            const navbarHeight = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+            // Scroll to position with smooth behavior
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
         }
     };
 
